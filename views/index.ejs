@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+
+<main class="main-content">
+  <div class="container">
+    <header class="page-header">
+      <h1>Welcome to My Blog</h1>
+      <p>Sharing thoughts, ideas, and experiences</p>
+    </header>
+
+    <div class="posts-grid">
+      <% if (posts.length === 0) { %>
+      <div class="no-posts">
+        <i class="fas fa-pen-nib"></i>
+        <h3>No posts yet</h3>
+        <p>Be the first to share something!</p>
+        <a href="/create" class="btn btn-primary">
+          <i class="fas fa-plus"></i>
+          Write Your First Post
+        </a>
+      </div>
+      <% } else { %> <% posts.forEach(post => { %>
+      <article class="post-card">
+        <div class="post-meta">
+          <span>
+            <i class="fas fa-user"></i>
+            <%= post.author %>
+          </span>
+          <span>
+            <i class="fas fa-calendar"></i>
+            <%= post.date.toLocaleDateString('en-US', { year: 'numeric', month:
+            'short', day: 'numeric' }) %>
+          </span>
+        </div>
+        <h2 class="post-title">
+          <a href="/posts/<%= post.id %>"><%= post.title %></a>
+        </h2>
+        <div class="post-excerpt">
+          <%= post.content.substring(0, 150) %><%= post.content.length > 150 ?
+          '...' : '' %>
+        </div>
+        <div class="post-actions">
+          <a href="/posts/<%= post.id %>" class="btn btn-outline">
+            <i class="fas fa-arrow-right"></i>
+            Read More
+          </a>
+          <div class="post-controls">
+            <a href="/posts/<%= post.id %>/edit" class="btn-icon" title="Edit">
+              <i class="fas fa-edit"></i>
+            </a>
+            <form
+              method="POST"
+              action="/posts/<%= post.id %>?_method=DELETE"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                class="btn-icon btn-danger"
+                title="Delete"
+                onclick="return confirm('Are you sure you want to delete this post?')"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </article>
+      <% }) %> <% } %>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

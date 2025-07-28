@@ -1,0 +1,55 @@
+<%- include('partials/header', { title: 'Create New Post' }) %>
+
+<main class="main-content">
+  <div class="container">
+    <header class="page-header">
+      <h1>Create New Post</h1>
+      <p>Share your thoughts with the world</p>
+    </header>
+
+    <div class="form-container">
+      <form action="/posts" method="POST" class="post-form">
+        <div class="form-group">
+          <label for="title">Post Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            required
+            placeholder="Enter an engaging title..."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            placeholder="Your name (optional)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea
+            id="content"
+            name="content"
+            required
+            placeholder="Write your post content here..."
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i>
+            Publish Post
+          </button>
+          <a href="/" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
